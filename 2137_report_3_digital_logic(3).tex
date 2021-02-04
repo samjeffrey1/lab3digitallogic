@@ -1,0 +1,129 @@
+% Digital Logic Report Template
+% Created: 2020-01-10, John Miller
+
+%==========================================================
+%=========== Document Setup  ==============================
+
+% Formatting defined by class file
+\documentclass[11pt]{article}
+
+% ---- Document formatting ----
+\usepackage[margin=1in]{geometry}	% Narrower margins
+\usepackage{booktabs}				% Nice formatting of tables
+\usepackage{graphicx}				% Ability to include graphics
+
+%\setlength\parindent{0pt}	% Do not indent first line of paragraphs 
+\usepackage[parfill]{parskip}		% Line space b/w paragraphs
+%	parfill option prevents last line of pgrph from being fully justified
+
+% Parskip package adds too much space around titles, fix with this
+\RequirePackage{titlesec}
+\titlespacing\section{0pt}{8pt plus 4pt minus 2pt}{3pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{4pt plus 4pt minus 2pt}{-2pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{2pt plus 4pt minus 2pt}{-6pt plus 2pt minus 2pt}
+
+% ---- Hyperlinks ----
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}	% For URL's. Automatically links internal references.
+
+% ---- Code listings ----
+\usepackage{listings} 					% Nice code layout and inclusion
+\usepackage[usenames,dvipsnames]{xcolor}	% Colors (needs to be defined before using colors)
+
+% Define custom colors for listings
+\definecolor{listinggray}{gray}{0.98}		% Listings background color
+\definecolor{rulegray}{gray}{0.7}			% Listings rule/frame color
+
+% Style for Verilog
+\lstdefinestyle{Verilog}{
+	language=Verilog,					% Verilog
+	backgroundcolor=\color{listinggray},	% light gray background
+	rulecolor=\color{blue}, 			% blue frame lines
+	frame=tb,							% lines above & below
+	linewidth=\columnwidth, 			% set line width
+	basicstyle=\small\ttfamily,	% basic font style that is used for the code	
+	breaklines=true, 					% allow breaking across columns/pages
+	tabsize=3,							% set tab size
+	commentstyle=\color{gray},	% comments in italic 
+	stringstyle=\upshape,				% strings are printed in normal font
+	showspaces=false,					% don't underscore spaces
+}
+
+% How to use: \Verilog[listing_options]{file}
+\newcommand{\Verilog}[2][]{%
+	\lstinputlisting[style=Verilog,#1]{#2}
+}
+
+
+
+
+%======================================================
+%=========== Body  ====================================
+\begin{document}
+
+\title{ELC 2137 Lab 2: Adders Lab}
+\author{Sam Jeffrey}
+
+\maketitle
+
+
+\section*{Summary}
+
+In this lab we started to think in a different mind set. As future engineers it is very important to have a desired function and work backwards to find the circuit that would do said function. In this lab where to build three different adders. The half adder, the full adder and the rippler adder. Not only by building these logic circuits did we start to think in this mindset but we were also introduced to logic chips. These chips have simple logic gates inside of them that allow us to compact our circuits. The half adder has two inputs and outputs a sum and a carry bit. This gives it four possibilities. The half adder has two basic logic gates in order to work, the AND gate and the exclusive OR gate. The full adder consists of two half adders. The full adder has three inputs including a carry input and has two outputs sum and carry. Finally the 2-bit rippler adder consists of two full adders chained together. The rippler adder has five inputs and has three outputs which are sum one, sum two and carry. 
+
+
+\section*{Q\&A}
+
+\begin{enumerate}
+	\item  Which gates could we use for combining the carry bits? Which one should we use and why?
+	
+	
+	Answer: We could use an exclusive OR gate or either an normal OR gate. We can use either gate because the net result will have one or the other carry active and never both. Meaning that there will only be one input into the gate. Therefore, both the exclusive OR and normal OR gate will work. Though a normal OR gate is simpler to create we are given exclusive OR gates therefore its easiest to use what is at our disposal. 
+	
+\end{enumerate}
+	
+\section*{Results}
+
+\begin{table}[ht]\centering
+	\caption{Truth table to prove outputs of the first and second stage HAs cannot both be high at the same time}
+	\label{tbl:example_table}
+	\begin{tabular}{ccc|cccc|cc}
+		\toprule
+		Cin & A & B & c1 & s1 & c2 & s2 & Cout & S \\
+		\midrule
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+		0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+		0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+		1 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+		1 & 1 & 0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+		1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 \\
+		\bottomrule
+	\end{tabular} 
+\end{table}
+
+\begin{figure}[ht]\centering
+	\includegraphics[angle = 270,width=0.5\textwidth,trim=0cm 5cm 0cm 5cm,clip]{IMG_0174.jpg}
+	\caption{Sheet with signatures and circuit schematics}
+	\label{fig:another_image}		% label must be after caption
+\end{figure}
+
+\begin{figure}[ht]\centering
+	\includegraphics[angle = 270,width=0.5\textwidth,trim=0cm 5cm 0cm 5cm,clip]{IMG_0170.jpg}
+	\caption{Half adder circuit}
+	\label{fig:another_image}		% label must be after caption
+\end{figure}
+
+\begin{figure}[ht]\centering
+	\includegraphics[angle = 270,width=0.5\textwidth,trim=0cm 5cm 0cm 5cm,clip]{IMG_0171.jpg}
+	\caption{Full adder circuit}
+	\label{fig:another_image}		% label must be after caption
+\end{figure}
+
+\begin{figure}[ht]\centering
+\includegraphics[angle = 270,width=0.5\textwidth,trim=0cm 5cm 0cm 5cm,clip]{IMG_0173.jpg}
+\caption{Ripple adder circuit}
+\label{fig:another_image}		% label must be after caption
+\end{figure}
+
+\end{document}
